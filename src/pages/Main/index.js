@@ -18,7 +18,7 @@ import {
   ProfileButtonText,
 } from './styles';
 
-export default function Main() {
+export default function Main(props) {
   const [newUser, setNewUser] = useState('');
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,6 +62,12 @@ export default function Main() {
     Keyboard.dismiss();
   }
 
+  function handleNavigate(user) {
+    const { navigation } = props;
+
+    navigation.navigate('User', { user });
+  }
+
   return (
     <Container>
       <Form>
@@ -92,7 +98,7 @@ export default function Main() {
             <Name>{item.name}</Name>
             <Bio>{item.bio}</Bio>
 
-            <ProfileButton onPress={() => {}}>
+            <ProfileButton onPress={() => handleNavigate(item)}>
               <ProfileButtonText>Ver perfil</ProfileButtonText>
             </ProfileButton>
           </User>
